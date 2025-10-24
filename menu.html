@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Menú — EggLab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <header class="site-header" role="banner">
+      <div class="container header-inner">
+        <a class="brand" href="index.html">EggLab</a>
+        <nav class="main-nav" role="navigation" aria-label="Navegación principal">
+          <a href="index.html#menu" class="nav-link">Menú</a>
+          <a href="index.html#sobre" class="nav-link">Sobre nosotros</a>
+          <a href="index.html#contacto" class="nav-link">Contacto</a>
+          <a href="index.html#reserva" class="nav-link">Reservas</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="container section menu-section">
+        <header class="section-head">
+          <h2>Menú</h2>
+          <p class="muted">Filtra por categoría y busca por nombre. La página muestra el menú para visualización.</p>
+        </header>
+
+        <div class="menu-controls">
+          <div class="filters" role="tablist" aria-label="Filtrar menú">
+            <button class="filter active" data-cat="all">Todos</button>
+            <button class="filter" data-cat="sandwiches">Sandwiches</button>
+            <button class="filter" data-cat="bebidas">Bebidas</button>
+            <button class="filter" data-cat="postres">Postres</button>
+          </div>
+          <div class="search">
+            <input id="menuSearch" type="search" placeholder="Buscar en el menú..." aria-label="Buscar en el menú">
+          </div>
+        </div>
+
+        <div id="menuGrid" class="menu-grid" aria-live="polite">
+          <!-- Items se insertan por JS -->
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© <span id="year"></span> EggLab — Hecho con cariño.</p>
+        <p class="muted">Síguenos: <a href="#">Instagram</a> · <a href="#">Facebook</a></p>
+      </div>
+    </footer>
+
+    <script src="js/app.js" defer></script>
+  </body>
+</html>
