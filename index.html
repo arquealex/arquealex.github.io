@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Brioche Room - Sándwiches Artesanales de Brioche</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
+    <header id="header">
+        <nav class="container">
+            <a href="#" class="logo">The Brioche Room</a>
+            <ul class="nav-links">
+                <li><a href="#hero">Inicio</a></li>
+                <li><a href="#about">Nosotros</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#gallery">Galería</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="hero-content">
+                <h1 class="animate-hero">El Arte del Brioche</h1>
+                <p class="animate-hero">Descubre sándwiches exquisitos con nuestro pan brioche recién horneado, hecho con pasión.</p>
+                <a href="#menu" class="cta-btn animate-hero">Ver Menú</a>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container grid-two-cols">
+                <div class="about-img animate-on-scroll">
+                    <img src="https://source.unsplash.com/random/600x600/?brioche,chef" alt="Chef preparando un sándwich de brioche">
+                </div>
+                <div class="about-text animate-on-scroll">
+                    <h2 class="section-title">Nuestra Filosofía Brioche</h2>
+                    <p>En "The Brioche Room", elevamos el sándwich a una experiencia gourmet. Nuestro secreto reside en el pan brioche, horneado diariamente con mantequilla de la mejor calidad para lograr esa textura dorada y aireada que nos caracteriza.</p>
+                    <p>Desde 2010, hemos perfeccionado cada receta, combinando ingredientes frescos y de origen local con la suavidad inigualable de nuestro brioche para crear un festín en cada bocado.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="section">
+            <div class="container">
+                <h2 class="section-title text-center animate-on-scroll">Nuestro Menú Estrella de Brioche</h2>
+                <div class="menu-grid">
+                    <div class="menu-item animate-on-scroll" data-name="El Clásico Brioche" data-desc="Jugoso pavo ahumado, queso suizo, lechuga fresca y tomate maduro con nuestra mayonesa especial de albahaca, todo en pan brioche artesanal." data-price="$11.50" data-img="https://source.unsplash.com/random/400x400/?brioche,turkey+sandwich">
+                        <img src="https://source.unsplash.com/random/400x400/?brioche,turkey+sandwich" alt="Sándwich El Clásico Brioche">
+                        <h3>El Clásico Brioche</h3>
+                        <span class="price">$11.50</span>
+                    </div>
+                    <div class="menu-item animate-on-scroll" data-name="Roast Beef en Brioche" data-desc="Roast beef de la casa, queso provolone, cebolla caramelizada, rúcula y mostaza dijon picante en nuestro pan brioche ligeramente tostado." data-price="$13.00" data-img="https://source.unsplash.com/random/400x400/?brioche,roastbeef+sandwich">
+                        <img src="https://source.unsplash.com/random/400x400/?brioche,roastbeef+sandwich" alt="Sándwich Roast Beef en Brioche">
+                        <h3>Roast Beef en Brioche</h3>
+                        <span class="price">$13.00</span>
+                    </div>
+                    <div class="menu-item animate-on-scroll" data-name="Brioche Vegano Deluxe" data-desc="Hummus de pimiento rojo asado, aguacate, pepino, brotes de alfalfa, zanahoria rallada y un toque de limón, servido en pan brioche vegano." data-price="$10.75" data-img="https://source.unsplash.com/random/400x400/?brioche,vegan+sandwich">
+                        <img src="https://source.unsplash.com/random/400x400/?brioche,vegan+sandwich" alt="Sándwich Brioche Vegano Deluxe">
+                        <h3>Brioche Vegano Deluxe</h3>
+                        <span class="price">$10.75</span>
+                    </div>
+                    <div class="menu-item animate-on-scroll" data-name="Italiano en Brioche" data-desc="Prosciutto, salami, queso mozzarella fresco, tomates secos y pesto de la casa en pan brioche ciabatta tostado." data-price="$14.50" data-img="https://source.unsplash.com/random/400x400/?brioche,italian+sandwich">
+                        <img src="https://source.unsplash.com/random/400x400/?brioche,italian+sandwich" alt="Sándwich Italiano en Brioche">
+                        <h3>Italiano en Brioche</h3>
+                        <span class="price">$14.50</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="section">
+            <div class="container">
+                <h2 class="section-title text-center animate-on-scroll">Momentos Deliciosos con Brioche</h2>
+                <div class="gallery-container animate-on-scroll">
+                    <div class="gallery-item"><img src="https://source.unsplash.com/random/600x400/?brioche+sandwich,food" alt="Foto de sándwich de brioche 1"></div>
+                    <div class="gallery-item"><img src="https://source.unsplash.com/random/600x400/?coffee,brioche+toast" alt="Foto de café y brioche tostado"></div>
+                    <div class="gallery-item"><img src="https://source.unsplash.com/random/600x400/?brioche+burger,fresh" alt="Foto de brioche burger fresca"></div>
+                    <div class="gallery-item"><img src="https://source.unsplash.com/random/600x400/?brioche+bakery,bread" alt="Foto de panadería de brioche"></div>
+                    <div class="gallery-item"><img src="https://source.unsplash.com/random/600x400/?brioche+ingredients,butter" alt="Foto de ingredientes de brioche"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container grid-two-cols">
+                <div class="contact-form animate-on-scroll">
+                    <h2 class="section-title">Contáctanos</h2>
+                    <form id="main-contact-form">
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="cta-btn">Enviar Mensaje</button>
+                    </form>
+                </div>
+                <div class="contact-info animate-on-scroll">
+                    <h2 class="section-title">Visítanos</h2>
+                    <p>Ven a probar nuestros exquisitos sándwiches de brioche.</p>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Calle Ficticia 123, 08001 Barcelona</li>
+                        <li><i class="fas fa-phone"></i> +34 93 123 45 67</li>
+                        <li><i class="fas fa-clock"></i> Lun - Sáb: 9:00 - 21:00</li>
+                    </ul>
+                    <div class="map-placeholder">
+                        <p>[Aquí iría un mapa incrustado de Google Maps]</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>&copy; 2025 The Brioche Room. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <div id="menu-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img id="modal-img" src="" alt="Sándwich de Brioche">
+            <h3 id="modal-name"></h3>
+            <p id="modal-desc"></p>
+            <span id="modal-price" class="price"></span>
+        </div>
+    </div>
+
+</body>
+</html>

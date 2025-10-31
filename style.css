@@ -1,0 +1,603 @@
+/* ======== VARIABLES Y GLOBALES (MINIMALISTAS) ======== */
+:root {
+    --primary-color: #1a1a1a; /* Negro/Gris muy oscuro */
+    --secondary-color: #1a1a1a; /* Unificado al primario */
+    --bg-color: #FFFFFF; /* Blanco puro */
+    --text-color: #1a1a1a;
+    --text-light: #555;
+    --white-color: #FFFFFF;
+    --border-color: #eaeaea; /* Borde gris muy claro */
+    --font-heading: 'Montserrat', sans-serif; /* Fuente limpia */
+    --font-body: 'Lato', sans-serif;
+    --transition-fast: all 0.2s ease-in-out;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+ul { list-style: none; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* ======== PRELOADER (Sin cambios) ======== */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--border-color);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ======== UTILIDADES (Minimalistas) ======== */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.section {
+    padding: 6rem 0;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.grid-two-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.cta-btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 0.8rem 2rem;
+    border-radius: 5px; /* Menos redondeado */
+    font-weight: 700;
+    transition: var(--transition-fast);
+    box-shadow: none; /* Sin sombra */
+    border: 1px solid var(--primary-color);
+}
+
+.cta-btn:hover {
+    background-color: var(--white-color);
+    color: var(--primary-color);
+    transform: translateY(0); /* Sin "lift" */
+    box-shadow: none;
+}
+
+.price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-color); /* Color de texto normal */
+}
+
+/* ======== HEADER (Minimalista) ======== */
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1.5rem 0;
+    transition: var(--transition-fast);
+}
+
+#header.scrolled {
+    background-color: var(--white-color);
+    padding: 1rem 0;
+    box-shadow: none; /* Sin sombra */
+    border-bottom: 1px solid var(--border-color); /* Borde sutil */
+}
+
+#header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    font-weight: 700;
+    color: var(--white-color);
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+#header.scrolled .nav-links a {
+    color: var(--text-color);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--white-color);
+    margin: 5px;
+    transition: var(--transition-fast);
+}
+
+#header.scrolled .burger div {
+    background-color: var(--text-color);
+}
+
+/* ======== HERO SECTION (Minimalista) ======== */
+#hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--white-color);
+    position: relative;
+    overflow: hidden;
+}
+
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://source.unsplash.com/random/1920x1080/?brioche+sandwich,gourmet') no-repeat center center/cover;
+    background-color: rgba(0,0,0,0.5); /* Mantenemos overlay para legibilidad */
+    background-blend-mode: multiply;
+    z-index: -1;
+    /* Sin animación Ken Burns */
+}
+
+.hero-content h1 {
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+/* Animación de entrada para el Hero (Sin cambios) */
+.animate-hero {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: heroFadeIn 1s ease-out forwards;
+}
+.animate-hero:nth-child(1) { animation-delay: 0.5s; }
+.animate-hero:nth-child(2) { animation-delay: 0.8s; }
+.animate-hero:nth-child(3) { animation-delay: 1.1s; }
+
+@keyframes heroFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ======== SECCIONES (Animación al scrollear - Sin cambios) ======== */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.animate-on-scroll:nth-child(2) { transition-delay: 0.2s; }
+.animate-on-scroll:nth-child(3) { transition-delay: 0.4s; }
+.animate-on-scroll:nth-child(4) { transition-delay: 0.6s; }
+
+/* ======== ABOUT SECTION (Minimalista) ======== */
+.about-img img {
+    border-radius: 5px; /* Menos redondeado */
+    box-shadow: none; /* Sin sombra */
+    border: 1px solid var(--border-color);
+}
+
+.about-text p {
+    margin-bottom: 1rem;
+    color: var(--text-light);
+}
+
+/* ======== MENU SECTION (Minimalista) ======== */
+#menu {
+    background-color: var(--bg-color); /* Fondo blanco */
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.menu-item {
+    background: var(--white-color);
+    border-radius: 5px;
+    box-shadow: none; /* Sin sombra */
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.menu-item:hover {
+    transform: translateY(0); /* Sin "lift" */
+    box-shadow: none;
+    border-color: var(--primary-color); /* Solo cambia el borde */
+}
+
+.menu-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.menu-item h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    padding: 1rem 1.5rem 0.5rem;
+}
+
+.menu-item .price {
+    padding: 0 1.5rem 1.5rem;
+    display: block;
+}
+
+/* ======== GALLERY SECTION (Minimalista) ======== */
+.gallery-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.gallery-item {
+    flex: 0 0 80%;
+    scroll-snap-align: center;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: none; /* Sin sombra */
+    border: 1px solid var(--border-color);
+}
+
+@media (min-width: 768px) {
+    .gallery-item {
+        flex-basis: 40%;
+    }
+}
+
+/* ======== CONTACT SECTION (Minimalista) ======== */
+#contact {
+    background-color: var(--bg-color);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-family: var(--font-body);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color); /* Solo resalta el borde */
+    box-shadow: none; /* Sin sombra de foco */
+}
+
+.contact-info ul {
+    margin-top: 2rem;
+}
+
+.contact-info li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+}
+
+.contact-info i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    width: 30px;
+    text-align: center;
+}
+
+.map-placeholder {
+    width: 100%;
+    height: 250px;
+    background-color: #f5f5f5; /* Gris más claro */
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #999;
+    margin-top: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+/* ======== FOOTER (Minimalista) ======== */
+#footer {
+    background-color: var(--text-color); /* Mantenemos footer oscuro */
+    color: #aaa;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.social-links {
+    margin-bottom: 1.5rem;
+}
+
+.social-links a {
+    color: var(--white-color);
+    font-size: 1.5rem;
+    margin: 0 1rem;
+    transition: var(--transition-fast);
+}
+
+.social-links a:hover {
+    color: #888; /* Un hover más sutil */
+}
+
+/* ======== MENU MODAL (Minimalista) ======== */
+.modal {
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: var(--white-color);
+    border-radius: 5px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    padding: 2rem;
+    text-align: center;
+    animation: slideIn 0.4s ease-out;
+    box-shadow: none; /* Sin sombra */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    color: #aaa;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.close-modal:hover {
+    color: var(--text-color);
+}
+
+#modal-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+}
+
+#modal-name {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+#modal-desc {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+}
+
+/* ======== RESPONSIVE (Minimalista - Ajustes de Menú) ======== */
+@media(max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+
+    .section {
+        padding: 4rem 0;
+    }
+
+    .grid-two-cols {
+        grid-template-columns: 1fr;
+    }
+
+    #about .about-img {
+        order: -1;
+    }
+    #contact .contact-form {
+        margin-bottom: 3rem;
+    }
+
+    .burger {
+        display: block;
+        z-index: 1002;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 60%;
+        /* Fondo negro para menú móvil */
+        background-color: var(--primary-color);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in-out;
+        z-index: 1001;
+    }
+
+    .nav-links a {
+        color: var(--white-color);
+        font-size: 1.5rem;
+    }
+
+    #header.scrolled .nav-links a {
+        color: var(--white-color);
+    }
+    
+    .nav-active {
+        transform: translateX(0%);
+    }
+
+    /* Animación del Burger 'X' */
+    .toggle .line1 {
+        transform: rotate(-45deg) translate(-5px, 6px);
+        background-color: var(--white-color);
+    }
+    .toggle .line2 {
+        opacity: 0;
+    }
+    .toggle .line3 {
+        transform: rotate(45deg) translate(-5px, -6px);
+        background-color: var(--white-color);
+    }
+    #header.scrolled .toggle .line1,
+    #header.scrolled .toggle .line3 {
+        /* Asegurarse de que la 'X' sea blanca sobre fondo negro */
+        background-color: var(--white-color);
+    }
+
+    .hero-content h1 {
+        font-size: 3.5rem;
+    }
+    .hero-content p {
+        font-size: 1.2rem;
+    }
+
+    .gallery-item {
+        flex-basis: 90%;
+    }
+}
