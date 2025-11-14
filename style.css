@@ -33,7 +33,39 @@ body {
 
 ul { list-style: none; }
 a { text-decoration: none; color: inherit; }
-img { max-width: 100%; height: auto; display: block; }
+img { 
+    max-width: 100%; 
+    height: auto; 
+    display: block; 
+}
+
+/* Estilos mejorados para las imágenes del menú */
+.menu-item img {
+    width: 100%;
+    height: 300px; /* Altura fija para uniformidad */
+    object-fit: cover; /* Mantiene la proporción y cubre el contenedor */
+    object-position: center; /* Centra la imagen */
+    border-radius: 8px; /* Bordes suavizados */
+    transition: transform 0.3s ease;
+    image-rendering: -webkit-optimize-contrast; /* Mejora la nitidez en webkit */
+    image-rendering: crisp-edges; /* Mejora la nitidez en otros navegadores */
+    backface-visibility: hidden; /* Evita problemas de renderizado */
+}
+
+.menu-item:hover img {
+    transform: scale(1.02); /* Efecto sutil al pasar el mouse */
+}
+
+/* Modal de menú mejorado */
+#menu-modal img {
+    max-width: 100%;
+    max-height: 70vh; /* Altura máxima relativa a la ventana */
+    width: auto;
+    height: auto;
+    object-fit: contain; /* Mantiene la proporción sin recortar */
+    border-radius: 12px; /* Bordes más suavizados para el modal */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
 
 /* ======== PRELOADER (Sin cambios) ======== */
 #preloader {
@@ -220,11 +252,20 @@ img { max-width: 100%; height: auto; display: block; }
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('https://source.unsplash.com/random/1920x1080/?brioche+sandwich,gourmet') no-repeat center center/cover;
-    background-color: rgba(0,0,0,0.5); /* Mantenemos overlay para legibilidad */
+    background: url('https://images.unsplash.com/photo-1620921575116-fb8902865f81?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+    background-color: rgba(0,0,0,0.4); /* Overlay más sutil para mejor visibilidad */
     background-blend-mode: multiply;
     z-index: -1;
-    /* Sin animación Ken Burns */
+    animation: slowZoom 30s ease-in-out infinite;
+}
+
+@keyframes slowZoom {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
 }
 
 .hero-content h1 {
@@ -333,29 +374,57 @@ img { max-width: 100%; height: auto; display: block; }
 .gallery-container {
     display: flex;
     overflow-x: auto;
-    gap: 1.5rem;
-    padding: 1.5rem 0;
+    gap: 2rem;
+    padding: 2rem 0;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--border-color);
+}
+
+.gallery-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.gallery-container::-webkit-scrollbar-track {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+.gallery-container::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 4px;
 }
 
 .gallery-item {
-    flex: 0 0 80%;
+    flex: 0 0 90%;
     scroll-snap-align: center;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.02);
 }
 
 .gallery-item img {
     width: 100%;
-    height: 400px;
+    height: 450px;
     object-fit: cover;
-    border-radius: 5px;
-    box-shadow: none; /* Sin sombra */
-    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: none;
+    transition: all 0.3s ease;
 }
 
 @media (min-width: 768px) {
     .gallery-item {
-        flex-basis: 40%;
+        flex-basis: 45%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .gallery-item {
+        flex-basis: 30%;
     }
 }
 
@@ -423,12 +492,152 @@ img { max-width: 100%; height: auto; display: block; }
     border: 1px solid var(--border-color);
 }
 
+/* ======== RESERVAS ======== */
+.reservas-modal-content {
+    max-width: 500px;
+    padding: 2rem;
+}
+
+.reservas-modal-content h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+#reservas-form {
+    display: grid;
+    gap: 1rem;
+}
+
+#reservas-form .form-group {
+    margin-bottom: 1rem;
+}
+
+#reservas-form input,
+#reservas-form select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-family: var(--font-body);
+}
+
+#reservas-form input:focus,
+#reservas-form select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* ======== RESEÑAS ======== */
+.resenas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.resena-item {
+    background: var(--white-color);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.resena-stars {
+    color: #ffd700;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.resena-texto {
+    font-style: italic;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.resena-autor {
+    font-weight: 700;
+    color: var(--text-light);
+}
+
 /* ======== FOOTER (Minimalista) ======== */
 #footer {
     background-color: var(--text-color); /* Mantenemos footer oscuro */
     color: #aaa;
     padding: 3rem 0;
     text-align: center;
+}
+
+/* ======== RESERVAS ======== */
+.reservas-modal-content {
+    max-width: 500px;
+    padding: 2rem;
+}
+
+.reservas-modal-content h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+#reservas-form {
+    display: grid;
+    gap: 1rem;
+}
+
+#reservas-form .form-group {
+    margin-bottom: 1rem;
+}
+
+#reservas-form input,
+#reservas-form select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-family: var(--font-body);
+}
+
+#reservas-form input:focus,
+#reservas-form select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* ======== RESEÑAS ======== */
+.resenas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.resena-item {
+    background: var(--white-color);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.resena-stars {
+    color: #ffd700;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.resena-texto {
+    font-style: italic;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.resena-autor {
+    font-weight: 700;
+    color: var(--text-light);
 }
 
 .social-links {

@@ -8,17 +8,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelector('.nav-links');
     const burger = document.querySelector('.burger');
     const modal = document.getElementById('menu-modal');
-    const closeModal = document.querySelector('.close-modal');
+    const closeModal = document.querySelector('#menu-modal .close-modal');
     const menuItems = document.querySelectorAll('.menu-item');
     const contactForm = document.getElementById('main-contact-form');
 
+    const reservasModal = document.getElementById('reservas-modal');
+    const reservasForm = document.getElementById('reservas-form');
+    const fechaInput = document.getElementById('fecha');
+
     // 1. Preloader: Ocultarlo cuando la página esté completamente cargada
     window.addEventListener('load', () => {
-        preloader.classList.add('hidden');
+        if (preloader) preloader.classList.add('hidden');
     });
 
     // 2. Header Pegajoso (Sticky) que cambia con el scroll
     const handleScroll = () => {
+        if (!header) return;
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
         } else {
@@ -27,95 +32,101 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     window.addEventListener('scroll', handleScroll);
 
+    // Establecer la fecha mínima como hoy para el formulario de reservas (si existe)
+    if (fechaInput) {
+        const today = new Date().toISOString().split('T')[0];
+        fechaInput.min = today;
+    }
+
     // 3. Menú de Hamburguesa (Móvil)
-    const toggleNav = () => {
-        // Animación de links
-        navLinks.classList.toggle('nav-active');
-        
-        // Animación del burger (X)
-        burger.classList.toggle('toggle');
-    };
-    burger.addEventListener('click', toggleNav);
+    if (burger && navLinks) {
+        const toggleNav = () => {
+            navLinks.classList.toggle('nav-active');
+            burger.classList.toggle('toggle');
+        };
+        burger.addEventListener('click', toggleNav);
+    }
 
     // 4. Animaciones al Hacer Scroll (Intersection Observer API)
-    // Esta es una técnica moderna y eficiente para animar elementos cuando entran en la pantalla
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
-    
-    const observerOptions = {
-        root: null, // Observa en relación al viewport
-        threshold: 0.1 // Se activa cuando el 10% del elemento es visible
-    };
-
-    const observerCallback = (entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Dejar de observar una vez animado
-            }
-        });
-    };
-
-    const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
-
-    animatedElements.forEach(el => {
-        scrollObserver.observe(el);
-    });
+    if (animatedElements.length) {
+        const observerOptions = { root: null, threshold: 0.1 };
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+        const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+        animatedElements.forEach(el => scrollObserver.observe(el));
+    }
 
     // 5. Lógica del Modal del Menú
-    
-    // Función para abrir el modal
-    const openModal = (e) => {
-        const item = e.currentTarget;
-        const name = item.dataset.name;
-        const desc = item.dataset.desc;
-        const price = item.dataset.price;
-        const img = item.dataset.img;
+    if (menuItems && modal) {
+        const openModal = (e) => {
+            const item = e.currentTarget;
+            const name = item.dataset.name || '';
+            const desc = item.dataset.desc || '';
+            const price = item.dataset.price || '';
+            const img = item.dataset.img || '';
 
-        // Poblar el modal con los datos del item
-        modal.querySelector('#modal-name').textContent = name;
-        modal.querySelector('#modal-desc').textContent = desc;
-        modal.querySelector('#modal-price').textContent = price;
-        modal.querySelector('#modal-img').src = img;
-        modal.querySelector('#modal-img').alt = name;
+            const modalName = modal.querySelector('#modal-name');
+            const modalDesc = modal.querySelector('#modal-desc');
+            const modalPrice = modal.querySelector('#modal-price');
+            const modalImg = modal.querySelector('#modal-img');
 
-        modal.style.display = 'flex'; // Mostrar el modal
-    };
+            if (modalName) modalName.textContent = name;
+            if (modalDesc) modalDesc.textContent = desc;
+            if (modalPrice) modalPrice.textContent = price;
+            if (modalImg) {
+                modalImg.src = img;
+                modalImg.alt = name;
+            }
 
-    // Función para cerrar el modal
-    const hideModal = () => {
-        modal.style.display = 'none';
-    };
+            modal.style.display = 'flex';
+        };
 
-    // Asignar eventos
-    menuItems.forEach(item => {
-        item.addEventListener('click', openModal);
-    });
+        const hideModal = () => { modal.style.display = 'none'; };
 
-    closeModal.addEventListener('click', hideModal);
+        menuItems.forEach(item => item.addEventListener('click', openModal));
+        if (closeModal) closeModal.addEventListener('click', hideModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) hideModal(); });
+    }
 
-    // Cerrar el modal si se hace clic fuera del contenido
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            hideModal();
+    // 6. Modal de Reservas
+    if (reservasModal) {
+        window.openReservasModal = function() { reservasModal.style.display = 'flex'; };
+        window.closeReservasModal = function() { reservasModal.style.display = 'none'; };
+
+        reservasModal.addEventListener('click', (e) => { if (e.target === reservasModal) closeReservasModal(); });
+
+        if (reservasForm) {
+            reservasForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Aquí se podría integrar envío a servidor; por ahora confirmación local
+                alert('¡Reserva realizada con éxito! Te enviaremos un email de confirmación.');
+                closeReservasModal();
+                reservasForm.reset();
+            });
         }
-    });
+    }
 
-    // 6. Validación simple del Formulario de Contacto
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // Prevenir el envío real del formulario
-
-        const name = contactForm.querySelector('#name').value;
-        const email = contactForm.querySelector('#email').value;
-        const message = contactForm.querySelector('#message').value;
-
-        if (name.trim() === '' || email.trim() === '' || message.trim() === '') {
-            alert('Por favor, rellena todos los campos.');
-            return;
-        }
-
-        // Simulación de envío exitoso
-        alert(`¡Gracias por tu mensaje, ${name}! Te contactaremos pronto.`);
-        contactForm.reset(); // Limpiar el formulario
-    });
+    // 7. Validación simple del Formulario de Contacto
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = contactForm.querySelector('#name').value;
+            const email = contactForm.querySelector('#email').value;
+            const message = contactForm.querySelector('#message').value;
+            if (name.trim() === '' || email.trim() === '' || message.trim() === '') {
+                alert('Por favor, rellena todos los campos.');
+                return;
+            }
+            alert(`¡Gracias por tu mensaje, ${name}! Te contactaremos pronto.`);
+            contactForm.reset();
+        });
+    }
 
 });
